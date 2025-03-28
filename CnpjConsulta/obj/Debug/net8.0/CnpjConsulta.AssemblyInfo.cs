@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CnpjConsulta")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4afc2787ec30c06f0eaa8d215db1bc78cd4e4b61")]
 [assembly: System.Reflection.AssemblyProductAttribute("CnpjConsulta")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CnpjConsulta")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

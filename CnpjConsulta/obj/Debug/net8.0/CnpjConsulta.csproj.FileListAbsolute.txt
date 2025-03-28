@@ -32,3 +32,4 @@ C:\DEV\CnpjConsulta\CnpjConsulta\obj\Debug\net8.0\refint\CnpjConsulta.dll
 C:\DEV\CnpjConsulta\CnpjConsulta\obj\Debug\net8.0\CnpjConsulta.pdb
 C:\DEV\CnpjConsulta\CnpjConsulta\obj\Debug\net8.0\CnpjConsulta.genruntimeconfig.cache
 C:\DEV\CnpjConsulta\CnpjConsulta\obj\Debug\net8.0\ref\CnpjConsulta.dll
+C:\DEV\CnpjConsulta\CnpjConsulta\obj\Debug\net8.0\CnpjConsulta.sourcelink.json

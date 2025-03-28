@@ -13,6 +13,11 @@
 		color: #ffff;
 	}
 
+	.subtitle {
+		color: #ffff;
+		font-size: 27px;
+	}
+
 	.fieldTitle {
 		color: #ffff;
 		font-size: 25px;
@@ -92,7 +97,7 @@
 		<div id="cnpjContainer">
 			<div id="cnpjRow">
 			<label class="fieldTitle" for="cnpj">Digite o CNPJ:</label>
-			<input class="cnpjField" type="text" id="cnpj" name="cnpj[]" maxlength="18" placeholder="00.000.000/0000-00" />
+			<input class="cnpjField" required type="text" id="cnpj" name="cnpj[]" maxlength="18" placeholder="00.000.000/0000-00" />
 			<button class="btnSearch" type="submit">Consultar</button>
 			<button class="btnShow" type="button" onclick="window.location.href='@Url.Action("ShowCnpj", "Cnpj")'">Visualizar dados salvos</button>
 			<button class="btnSearch" type="button" onclick="addCnpj()">Adicionar CNPJ</button>
@@ -104,7 +109,7 @@
 	@if (Model != null)
 	{
 
-		<h3 class="infoLabel">Dados do CNPJ</h3>
+		<h3 class="subtitle">Dados do CNPJ</h3>
 		<div class="infoContainer">
 			<p class="infoLabel"><strong>Nome:</strong> @Model.Nome</p>
 			<p class="infoLabel"><strong>Nome Fantasia:</strong> @Model.NomeFantasia</p>
@@ -143,7 +148,9 @@
 		}
 
 		function salvarNoLocalStorage(dados) {
+			$("#btnSearch").prop("disabled", true).text("Consultando...");
 			localStorage.setItem('cnpjDados', JSON.stringify(dados));
+			$("#btnSearch").prop("disabled", false).text("Consultar");
 		}
 
 		function carregarDadosDoLocalStorage() {
