@@ -80,9 +80,9 @@ A aplicação estará disponível em:
 
 ## 👨‍💻 **Autor**
 
-🔹 Nome: João Vitor Antunes
-🔹 GitHub: https://github.com/Jonis-Victor
-🔹 LinkedIn: https://www.linkedin.com/in/joaovitortunes/
-🔹 Portfólio: https://jonisvictor.vercel.app
+<p>🔹 Nome: João Vitor Antunes</p>
+<p>🔹 GitHub: https://github.com/Jonis-Victor</p>
+<p>🔹 LinkedIn: https://www.linkedin.com/in/joaovitortunes/</p>
+<p>🔹 Portfólio: https://jonisvictor.vercel.app</p>
 
 
