@@ -1,0 +1,63 @@
+﻿@{
+    ViewData["Title"] = "Mostrar Dados do CNPJ";
+}
+
+<style>
+    body {
+       background-color: #313B53;
+    }
+    .container {
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       justify-content: center;
+    }
+
+    .title {
+        color: #ffff;
+    }
+    .infoLabel {
+       font-size: 18px;
+    }
+    .result {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        background-color: #ffff;
+        padding-left: 20px;
+        padding-right: 20px;
+        border-radius: 20px;
+    }
+
+</style>
+
+<div class="container">
+    <h1 class ="title">Dados Armazenados no CNPJ</h1>
+
+    <div class="result">
+        <p><strong>Nome:</strong> <span id="nomeEmpresa"></span></p>
+        <p><strong>Nome Fantasia:</strong> <span id="nomeFantasia"></span></p>
+        <p><strong>CNPJ:</strong> <span id="cnpj"></span></p>
+        <p><strong>Situação:</strong> <span id="situacao"></span></p>
+        <p><strong>Tipo:</strong> <span id="tipo"></span></p>
+    </div>
+</div>
+
+<script>
+    function carregarDadosDoLocalStorage() {
+        const dados = localStorage.getItem('cnpjDados');
+        if (dados) {
+            const dadosParsed = JSON.parse(dados);
+            document.getElementById("nomeEmpresa").innerText = dadosParsed.nome || "Não disponível";
+            document.getElementById("nomeFantasia").innerText = dadosParsed.fantasia || "Não disponível";
+            document.getElementById("cnpj").innerText = dadosParsed.cnpj || "Não disponível";
+            document.getElementById("situacao").innerText = dadosParsed.situacao || "Não disponível";
+            document.getElementById("tipo").innerText = dadosParsed.tipo || "Não disponível";
+        } else {
+            alert("Nenhum dado encontrado no localStorage.");
+        }
+    }
+
+    window.onload = carregarDadosDoLocalStorage;
+</script>

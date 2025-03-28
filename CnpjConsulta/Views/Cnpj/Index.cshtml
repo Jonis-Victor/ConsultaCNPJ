@@ -1,0 +1,178 @@
+﻿@model CnpjResponse
+
+@{
+	ViewData["Title"] = "Consulta CNPJ";
+}
+
+<style>
+	body {
+		background-color: #313B53;
+	}
+
+	.title {
+		color: #ffff;
+	}
+
+	.fieldTitle {
+		color: #ffff;
+		font-size: 25px;
+	}
+
+	.formflex {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 10px;
+	}
+
+	.container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.cnpjField {
+		padding: 15px;
+		border-radius: 10px;
+		font-size: 20px;
+	}
+
+	.btnSearch {
+		height: 55px;
+		width: 128px;
+		border-radius: 10px;
+		cursor: pointer;
+		font-size: 18px;
+		text-decoration: none;
+	}
+
+	.btnShow {
+		height: 55px;
+		width: 180px;
+		border-radius: 10px;
+		cursor: pointer;
+		font-size: 18px;
+		text-decoration: none;
+	}
+
+	.infoContainer {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: center;
+		background-color: #ffff;
+		padding-left: 20px;
+		padding-right: 20px;
+		border-radius: 20px;
+	}
+
+	.infoLabel {
+		font-size: 18px;
+	}
+
+	#cnpjContainer {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	#cnpjRow {
+		display: flex;
+		align-items: center;
+		gap: 10px;	
+	}
+
+</style>
+
+<div class="container">
+	<h1 class="title">Consulta de CNPJ</h1>
+
+	<form class="formflex" method="post" onsubmit="formatarCnpj()">
+		<div id="cnpjContainer">
+			<div id="cnpjRow">
+			<label class="fieldTitle" for="cnpj">Digite o CNPJ:</label>
+			<input class="cnpjField" type="text" id="cnpj" name="cnpj[]" maxlength="18" placeholder="00.000.000/0000-00" />
+			<button class="btnSearch" type="submit">Consultar</button>
+			<button class="btnShow" type="button" onclick="window.location.href='@Url.Action("ShowCnpj", "Cnpj")'">Visualizar dados salvos</button>
+			<button class="btnSearch" type="button" onclick="addCnpj()">Adicionar CNPJ</button>
+			</div>
+		</div>
+	</form>
+	
+
+	@if (Model != null)
+	{
+
+		<h3 class="infoLabel">Dados do CNPJ</h3>
+		<div class="infoContainer">
+			<p class="infoLabel"><strong>Nome:</strong> @Model.Nome</p>
+			<p class="infoLabel"><strong>Nome Fantasia:</strong> @Model.NomeFantasia</p>
+			<p class="infoLabel"><strong>CNPJ:</strong> @Model.Cnpj</p>
+			<p class="infoLabel"><strong>Situação:</strong> @Model.Situacao</p>
+			<p class="infoLabel"><strong>Tipo:</strong> @Model.Tipo</p>
+
+			<h3 class="infoLabel">Atividade Principal:</h3>
+			@if (Model.AtividadesPrincipais != null && Model.AtividadesPrincipais.Any())
+			{
+				<ul>
+					@foreach (var atividade in Model.AtividadesPrincipais)
+					{
+						<li class="infoLabel"><strong>@atividade.Codigo:</strong> @atividade.Descricao</li>
+					}
+				</ul>
+			}
+			else
+			{
+				<p class="infoLabel">Nenhuma atividade principal encontrada.</p>
+			}
+		</div>
+	}
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
+	<script>
+		$(document).ready(function () {
+			$('#cnpj').mask('00.000.000/0000-00');
+		});
+
+		function formatarCnpj() {
+			let cnpj = document.getElementById('cnpj');
+			cnpj.value = cnpj.value.replace(/\D/g, '');
+		}
+
+		function salvarNoLocalStorage(dados) {
+			localStorage.setItem('cnpjDados', JSON.stringify(dados));
+		}
+
+		function carregarDadosDoLocalStorage() {
+			const dados = localStorage.getItem('cnpjDados');
+			if (dados) {
+				const dadosParsed = JSON.parse(dados);
+				console.log(dadosParsed);
+			}
+		}
+
+		function addCnpj(){
+		const newRow = `
+					<div id="cnpjRow">
+						<label class="fieldTitle" for="cnpj">Digite o CNPJ:</label>
+						<input class="cnpjField" type="text" name="cnpj[]" maxlength="18" placeholder="00.000.000/0000-00" />
+						<button class="btnSearch" type="submit">Consultar</button>
+						<button class="btnShow" type="button" onclick="window.location.href='@Url.Action("ShowCnpj", "Cnpj")'">Visualizar dados salvos</button>
+						<button class="btnSearch" type="button" onclick="addCnpj()">Adicionar CNPJ</button>
+					</div>
+				`;
+			$('#cnpjContainer').append(newRow);
+			$('input[name="cnpj[]"]').mask('00.000.000/0000-00');
+		}
+
+		$(document).ready(function() {
+			const cnpjResponse = @Html.Raw(Json.Serialize(Model));
+			if (cnpjResponse) {
+				salvarNoLocalStorage(cnpjResponse);
+			}
+		});
+	</script>
+</div>
